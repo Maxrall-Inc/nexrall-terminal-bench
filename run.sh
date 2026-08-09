@@ -75,6 +75,16 @@ case "$MODE" in
     ;;
   --task)
     TASK="${2:?usage: run.sh --task <task-name>}"
+    # harbor's --include-task-name matches the FULL task id
+    # ("terminal-bench/<name>"), not the bare name — confirmed live via
+    # `harbor run --print-config`: passing the bare name silently matches
+    # zero tasks and harbor errors out with "No tasks matched the filter(s)".
+    # Auto-prefix here so `run.sh --task write-compressor` (the form the
+    # README's own examples use) actually works.
+    case "$TASK" in
+      terminal-bench/*) ;;
+      *) TASK="terminal-bench/$TASK" ;;
+    esac
     echo "==> Single task: $TASK"
     harbor run \
       --dataset "$DATASET" \
