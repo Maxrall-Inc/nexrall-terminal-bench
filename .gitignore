@@ -1,0 +1,22 @@
+# Working artifacts of a benchmark run — big, ephemeral, and NOT the
+# git-tracked publication format. Published results live under
+# results/<model>/<run_id>/ (summary.json, index.json) — see
+# publish_result.py. Everything below is ignored EXCEPT that one directory
+# (the negations at the bottom).
+.venv/
+nex-tbench-results/
+tmp-jobs*/
+*.tar.gz
+*.tar.gz.sha256
+
+# Python
+__pycache__/
+*.pyc
+.ruff_cache/
+*.egg-info/
+
+# Never ignore the actual published results, even though they also end in
+# .json — these are the small, git-tracked artifacts.
+!results/
+!results/**
+!results/**/*.json

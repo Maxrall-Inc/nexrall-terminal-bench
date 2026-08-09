@@ -1,0 +1,21 @@
+# Terminal-Bench 2.1 leaderboard submission metadata.
+#
+# Required fields per harborframework/terminal-bench-2-leaderboard's own
+# README (huggingface.co/datasets/harborframework/terminal-bench-2-leaderboard):
+#   agent_url, agent_display_name, agent_org_display_name, and a `models`
+#   list each with model_name/model_provider/model_display_name/
+#   model_org_display_name.
+#
+# One file per submitted run — copy this alongside the job directory when
+# opening a PR against harbor-framework/terminal-bench-2-1, per that repo's
+# leaderboard/SUBMIT.md.
+
+agent_url: https://github.com/Maxrall-Inc/nexrall-terminal-bench
+agent_display_name: "Nexrall Code (nex)"
+agent_org_display_name: "Nexrall"
+
+models:
+  - model_name: deepseek-v4-pro
+    model_provider: deepseek
+    model_display_name: "DeepSeek V4 Pro"
+    model_org_display_name: "DeepSeek"
