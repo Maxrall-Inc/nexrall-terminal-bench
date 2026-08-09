@@ -69,7 +69,10 @@ into a local `.venv`. Safe to re-run.
 
 ```bash
 source .venv/bin/activate
-export NEXRALL_TOKEN=...          # headless auth for the nex CLI (nex login --print-token)
+export NEXRALL_TOKEN=...          # headless auth for the nex CLI — run `nex auth`
+                                   # locally once, then copy the "token" field
+                                   # from ~/.nexrall/config.json (there is no
+                                   # `nex login --print-token` command)
 
 # 1. Smoke test — 5 tasks, proves the whole pipeline works before spending
 #    real money on all 89.
