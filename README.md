@@ -73,6 +73,8 @@ export NEXRALL_TOKEN=...          # headless auth for the nex CLI — run `nex a
                                    # locally once, then copy the "token" field
                                    # from ~/.nexrall/config.json (there is no
                                    # `nex login --print-token` command)
+export EFFORT=high                 # optional — reasoning-effort level for `nex`
+                                   # (low|medium|high|extra; default: medium)
 
 # 1. Smoke test — 5 tasks, proves the whole pipeline works before spending
 #    real money on all 89.
@@ -83,7 +85,8 @@ bash run.sh --task <task-name>
 
 # 3. Full run — all 89 tasks, k=5 trials each (leaderboard-eligible trial
 #    count), local Docker, concurrency 4 by default.
-CONCURRENCY=8 bash run.sh --full
+#    To set effort on a full run:
+MODEL=deepseek/deepseek-v4-pro EFFORT=high CONCURRENCY=6 bash run.sh --full
 ```
 
 Cost & infrastructure: Terminal-Bench containers are much lighter than
