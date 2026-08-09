@@ -11,8 +11,8 @@
 # leaderboard/SUBMIT.md.
 
 agent_url: https://github.com/Maxrall-Inc/nexrall-terminal-bench
-agent_display_name: "Nexrall Code (nex)"
-agent_org_display_name: "Nexrall"
+agent_display_name: "Nexrall Code"
+agent_org_display_name: "Maxrall, Inc."
 
 models:
   - model_name: deepseek-v4-pro
