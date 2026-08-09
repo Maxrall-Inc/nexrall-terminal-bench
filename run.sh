@@ -20,6 +20,13 @@
 #                               anthropic/claude-sonnet-5)
 #   CONCURRENCY                 optional — Harbor's -n flag (default: 4,
 #                               local Docker)
+#   EFFORT                      optional — nex's reasoning-effort level,
+#                               forwarded as `--ak reasoning_effort=<level>`
+#                               (harbor's own convention — see
+#                               nex_agent.py's CLI_FLAGS entry, which validates
+#                               against low|medium|high|extra before it ever
+#                               reaches `nex`). Unset by default: nex's own
+#                               interactive default (medium) applies.
 #   JOBS_DIR                    optional — where Harbor writes job output
 #                               (default: ./nex-tbench-results)
 #   AGENT_TIMEOUT_MULTIPLIER    optional — Harbor's --agent-timeout-multiplier
@@ -59,6 +66,14 @@ AGENT_TIMEOUT_MULTIPLIER="${AGENT_TIMEOUT_MULTIPLIER:-1.0}"
 DATASET="terminal-bench/terminal-bench-2-1"
 AGENT="nex_terminal_bench:NexAgent"
 
+# Empty when EFFORT is unset — no --ak flag is passed at all in that case,
+# leaving nex_agent.py's CLI_FLAGS default (nex's own interactive default)
+# unchanged from before this flag existed.
+EFFORT_FLAG=()
+if [ -n "${EFFORT:-}" ]; then
+  EFFORT_FLAG=(--ak "reasoning_effort=${EFFORT}")
+fi
+
 MODE="${1:-}"
 case "$MODE" in
   --smoke)
@@ -71,6 +86,7 @@ case "$MODE" in
       --n-concurrent "$CONCURRENCY" \
       --agent-timeout-multiplier "$AGENT_TIMEOUT_MULTIPLIER" \
       --jobs-dir "$JOBS_DIR" \
+      "${EFFORT_FLAG[@]}" \
       --yes
     ;;
   --task)
@@ -93,6 +109,7 @@ case "$MODE" in
       --include-task-name "$TASK" \
       --agent-timeout-multiplier "$AGENT_TIMEOUT_MULTIPLIER" \
       --jobs-dir "$JOBS_DIR" \
+      "${EFFORT_FLAG[@]}" \
       --yes
     ;;
   --full)
@@ -107,6 +124,7 @@ case "$MODE" in
       --n-concurrent "$CONCURRENCY" \
       --agent-timeout-multiplier "$AGENT_TIMEOUT_MULTIPLIER" \
       --jobs-dir "$JOBS_DIR" \
+      "${EFFORT_FLAG[@]}" \
       --yes
     ;;
   *)
